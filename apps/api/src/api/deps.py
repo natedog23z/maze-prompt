@@ -1,16 +1,16 @@
 from typing import Annotated
 
 from fastapi import Depends, HTTPException
-from supabase_py_async import AsyncClient, create_client
-from supabase_py_async.lib.client_options import ClientOptions
+from supabase import acreate_client, Client
+from supabase.lib.client_options import ClientOptions
 
 from src.config import settings
 
 
-async def get_db() -> AsyncClient:
-    client: AsyncClient | None = None
+async def get_db() -> Client:
+    client: Client | None = None
     try:
-        client = await create_client(
+        client = await acreate_client(
             settings.DB_URL,
             settings.DB_API_KEY,
             options=ClientOptions(
@@ -27,4 +27,4 @@ async def get_db() -> AsyncClient:
         raise
 
 
-SessionDep = Annotated[AsyncClient, Depends(get_db)]
+SessionDep = Annotated[Client, Depends(get_db)]
