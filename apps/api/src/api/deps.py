@@ -1,14 +1,14 @@
 from typing import Annotated
 
 from fastapi import Depends, HTTPException
-from supabase import acreate_client, Client
+from supabase import AsyncClient, acreate_client
 from supabase.lib.client_options import ClientOptions
 
 from src.config import settings
 
 
-async def get_db() -> Client:
-    client: Client | None = None
+async def get_db() -> AsyncClient:
+    client: AsyncClient | None = None
     try:
         client = await acreate_client(
             settings.DB_URL,
@@ -27,4 +27,4 @@ async def get_db() -> Client:
         raise
 
 
-SessionDep = Annotated[Client, Depends(get_db)]
+SessionDep = Annotated[AsyncClient, Depends(get_db)]

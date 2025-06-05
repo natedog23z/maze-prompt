@@ -1,6 +1,6 @@
 from typing import Generic, Optional, TypeVar
 
-from supabase import Client
+from supabase import AsyncClient
 
 from src.schemas.base import CreateBase, ResponseBase, UpdateBase
 
@@ -18,7 +18,7 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
         """
         self.model = model
 
-    async def get(self, db: Client, *, id: str) -> Optional[ModelType]:
+    async def get(self, db: AsyncClient, *, id: str) -> Optional[ModelType]:
         """get by table_name by id"""
         data, count = (
             await db.table(self.model.table_name).select("*").eq("id", id).execute()
@@ -26,14 +26,14 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
         _, got = data
         return self.model(**got[0]) if got else None
 
-    async def get_all(self, db: Client) -> list[ModelType]:
+    async def get_all(self, db: AsyncClient) -> list[ModelType]:
         """get all by table_name"""
         data, count = await db.table(self.model.table_name).select("*").execute()
         _, got = data
         return [self.model(**item) for item in got]
 
     async def search_all(
-        self, db: Client, *, field: str, search_value: str, max_results: int
+        self, db: AsyncClient, *, field: str, search_value: str, max_results: int
     ) -> list[ModelType]:
         """search all by table_name"""
         data, count = (
@@ -46,7 +46,7 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
         _, got = data
         return [self.model(**item) for item in got]
 
-    async def create(self, db: Client, *, obj_in: CreateSchemaType) -> ModelType:
+    async def create(self, db: AsyncClient, *, obj_in: CreateSchemaType) -> ModelType:
         """create by CreateSchemaType"""
         data, count = (
             await db.table(self.model.table_name).insert(obj_in.model_dump()).execute()
@@ -54,7 +54,7 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
         _, created = data
         return self.model(**created[0])
 
-    async def update(self, db: Client, *, obj_in: UpdateSchemaType) -> ModelType:
+    async def update(self, db: AsyncClient, *, obj_in: UpdateSchemaType) -> ModelType:
         """update by UpdateSchemaType"""
         data, count = (
             await db.table(self.model.table_name)
