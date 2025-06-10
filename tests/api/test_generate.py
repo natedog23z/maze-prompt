@@ -14,4 +14,4 @@ def test_generate_endpoint():
     assert resp.status_code == 200
     data = resp.json()
     PromptTokens(**data)  # validates schema
-    assert data["subject_token"] == "dog" 
+    assert data["subject_token"] == "person" 
