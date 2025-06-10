@@ -1,6 +1,8 @@
+from .routers.prompts import router as prompts_router
 from .factory import create_app
 
 app = create_app()
+app.include_router(prompts_router)
 
 if __name__ == "__main__":
     import uvicorn
