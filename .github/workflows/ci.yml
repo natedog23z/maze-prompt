@@ -29,6 +29,10 @@ jobs:
         with:
           python-version: '3.11'
           cache: 'pip'
+          cache-dependency-path: '**/requirements*.txt'
+
+      - name: Install Python dependencies
+        run: pip install pytest pydantic
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
@@ -56,6 +60,10 @@ jobs:
         with:
           python-version: '3.11'
           cache: 'pip'
+          cache-dependency-path: '**/requirements*.txt'
+
+      - name: Install Python dependencies
+        run: pip install pytest pydantic ruff
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
@@ -89,6 +97,10 @@ jobs:
         with:
           python-version: '3.11'
           cache: 'pip'
+          cache-dependency-path: '**/requirements*.txt'
+
+      - name: Install Python dependencies
+        run: pip install pytest pydantic
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
