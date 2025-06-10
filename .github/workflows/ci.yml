@@ -32,7 +32,7 @@ jobs:
           cache-dependency-path: '**/requirements*.txt'
 
       - name: Install Python dependencies
-        run: pip install pytest pydantic
+        run: pip install pytest pytest-asyncio pydantic
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
@@ -63,7 +63,7 @@ jobs:
           cache-dependency-path: '**/requirements*.txt'
 
       - name: Install Python dependencies
-        run: pip install pytest pydantic ruff
+        run: pip install pytest pytest-asyncio pydantic ruff
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
@@ -100,7 +100,7 @@ jobs:
           cache-dependency-path: '**/requirements*.txt'
 
       - name: Install Python dependencies
-        run: pip install pytest pydantic
+        run: pip install pytest pytest-asyncio pydantic
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
