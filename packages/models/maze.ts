@@ -4,7 +4,7 @@ export const promptTokensSchema = z.object({
   subject_token: z.string(),
   action_token: z.string(),
   environment_token: z.string(),
-});
+}).strict();
 
 export type PromptTokens = z.infer<typeof promptTokensSchema>;
 
