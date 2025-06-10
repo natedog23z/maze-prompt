@@ -1,0 +1,15 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+conventions:
+  file_naming:
+    - Use snake_case for Python files
+    - Use kebab-case for TypeScript/React components
+    - Use PascalCase for React component filenames
+    - Test files end with .test.ts or .test.py
+    - Group by feature, not by file type
+    - Shared code goes in `packages/`
+    - Keep nesting under 4 levels deep
+    - Co-locate tests with source files
