@@ -1,20 +1,4 @@
-from fastapi import FastAPI
-
-from .routers import prompts
-
-
-def create_app() -> FastAPI:
-    app = FastAPI(title="Maze API", version="0.1.0")
-    
-    # Include routers
-    app.include_router(prompts.router)
-    
-    @app.get("/health")
-    async def health_check():
-        return {"status": "ok"}
-    
-    return app
-
+from .factory import create_app
 
 app = create_app()
 
