@@ -1,7 +1,7 @@
 import json
-import pytest
 from typing import Any, Dict
 
+import pytest
 from pydantic import BaseModel
 
 from packages.agents.base import MazeAgent

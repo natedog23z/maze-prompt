@@ -9,7 +9,7 @@ describe("PromptTokens Zod schema", () => {
 
   it("rejects extra fields", () => {
     expect(() =>
-      promptTokensSchema.parse({ ...EXAMPLE_TOKENS, extra: "nope" })
+      promptTokensSchema.parse({ ...EXAMPLE_TOKENS, extra: "nope" }),
     ).toThrow();
   });
-}); 
+});

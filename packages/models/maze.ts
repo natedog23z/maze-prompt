@@ -1,10 +1,12 @@
 import { z } from "zod";
 
-export const promptTokensSchema = z.object({
-  subject_token: z.string(),
-  action_token: z.string(),
-  environment_token: z.string(),
-}).strict();
+export const promptTokensSchema = z
+  .object({
+    subject_token: z.string(),
+    action_token: z.string(),
+    environment_token: z.string(),
+  })
+  .strict();
 
 export type PromptTokens = z.infer<typeof promptTokensSchema>;
 
@@ -16,4 +18,4 @@ export const EXAMPLE_TOKENS = {
   subject_token: "cat",
   action_token: "jumps",
   environment_token: "rooftop",
-}; 
+};
