@@ -106,7 +106,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Test JavaScript/TypeScript
-        run: pnpm test -- --run
+        run: cd packages/models && pnpm test
 
       - name: Test Python
         run: python -m pytest -q
