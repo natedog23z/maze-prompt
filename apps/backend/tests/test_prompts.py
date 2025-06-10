@@ -1,7 +1,11 @@
+# Standard library imports
 import pytest
+
+# Third-party imports
 from fastapi.testclient import TestClient
 from pydantic import TypeAdapter
 
+# Local imports
 from app.main import create_app
 from packages.models import PromptTokens
 

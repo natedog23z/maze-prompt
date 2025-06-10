@@ -1,5 +1,7 @@
+# Standard library imports
 from typing import Dict, Optional
 
+# Third-party imports
 from fastapi import Depends, HTTPException, status
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 
