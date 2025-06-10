@@ -1,6 +1,7 @@
-from fastapi import Depends, HTTPException, status, Request
-from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from typing import Dict, Optional
+
+from fastapi import Depends, HTTPException, status
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 
 security = HTTPBearer(auto_error=False)
 
@@ -33,7 +34,9 @@ async def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(s
 
 
 # Optional auth for endpoints that can work with or without authentication
-async def get_optional_user(credentials: Optional[HTTPAuthorizationCredentials] = Depends(security)) -> Optional[Dict]:
+async def get_optional_user(
+    credentials: Optional[HTTPAuthorizationCredentials] = Depends(security)
+) -> Optional[Dict]:
     """Optional authentication - returns None if no valid token is provided"""
     if not credentials:
         return None

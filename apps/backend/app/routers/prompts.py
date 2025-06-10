@@ -1,8 +1,10 @@
-from fastapi import APIRouter, Depends, HTTPException
 from typing import Any, Dict, Optional
+
+from fastapi import APIRouter, Depends, HTTPException
 
 from packages.agents import SubjectAgent
 from packages.models import PromptTokens
+
 from ..dependencies.auth import get_optional_user
 
 router = APIRouter(prefix="/prompts", tags=["prompts"])

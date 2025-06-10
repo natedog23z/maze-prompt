@@ -2,8 +2,8 @@ import pytest
 from fastapi.testclient import TestClient
 from pydantic import TypeAdapter
 
-from packages.models import PromptTokens
 from app.main import create_app
+from packages.models import PromptTokens
 
 
 @pytest.fixture
@@ -30,7 +30,8 @@ def test_generate_prompt(client):
     assert tokens.environment_token
     
     # Check that the sentence generation works
-    assert tokens.to_sentence() == f"{tokens.subject_token} {tokens.action_token} {tokens.environment_token}"
+    expected = f"{tokens.subject_token} {tokens.action_token} {tokens.environment_token}"
+    assert tokens.to_sentence() == expected
 
 
 def test_generate_prompt_with_context(client):
