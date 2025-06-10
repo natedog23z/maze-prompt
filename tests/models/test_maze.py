@@ -1,5 +1,7 @@
-from packages.models.maze import PromptTokens, EXAMPLE_TOKENS
 import pytest
+
+from packages.models.maze import EXAMPLE_TOKENS, PromptTokens
+
 
 def test_sentence_round_trip():
     tok = PromptTokens(**EXAMPLE_TOKENS)

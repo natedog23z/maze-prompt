@@ -1,6 +1,8 @@
 from typing import Any, Dict
-from .base import MazeAgent
+
 from packages.models import PromptTokens
+
+from .base import MazeAgent
 
 
 class SubjectAgent(MazeAgent[PromptTokens]):

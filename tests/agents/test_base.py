@@ -1,9 +1,9 @@
 import json
 import pytest
 from typing import Any, Dict
-from unittest.mock import patch
 
 from pydantic import BaseModel
+
 from packages.agents.base import MazeAgent
 
 

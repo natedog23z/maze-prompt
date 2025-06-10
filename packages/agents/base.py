@@ -78,7 +78,9 @@ class MazeAgent(Generic[T], ABC):
                             except json.JSONDecodeError as e:
                                 raise ValueError(f"Invalid JSON: {e}")
                         else:
-                            raise TypeError(f"Expected {self.model_class.__name__}, got {type(result).__name__}")
+                            expected = self.model_class.__name__
+                            got = type(result).__name__
+                            raise TypeError(f"Expected {expected}, got {got}")
                 
                 return result
             
