@@ -1,13 +1,12 @@
-from typing import Any, Dict, Optional
+from typing import Optional
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends
 from pydantic import BaseModel
 
 from packages.agents.subject import SubjectAgent
 from packages.models.maze import PromptTokens
 
 from ..deps import get_current_user
-import asyncio
 
 router = APIRouter(prefix="/prompts", tags=["prompts"])
 

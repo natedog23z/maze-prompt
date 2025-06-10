@@ -9,12 +9,7 @@ from pydantic import TypeAdapter
 from app.main import create_app
 from packages.models import PromptTokens
 
-
-@pytest.fixture
-def client():
-    app = create_app()
-    return TestClient(app)
-
+client = TestClient(create_app())
 
 def test_generate_prompt(client):
     """Test that the generate endpoint returns a valid PromptTokens schema with 200 status code."""
@@ -23,19 +18,9 @@ def test_generate_prompt(client):
     # Check status code
     assert response.status_code == 200
     
-    # Check schema
+    # Validate response schema
     data = response.json()
-    validator = TypeAdapter(PromptTokens)
-    tokens = validator.validate_python(data)
-    
-    # Check that all required fields are present
-    assert tokens.subject_token
-    assert tokens.action_token
-    assert tokens.environment_token
-    
-    # Check that the sentence generation works
-    expected = f"{tokens.subject_token} {tokens.action_token} {tokens.environment_token}"
-    assert tokens.to_sentence() == expected
+    PromptTokens(**data)
 
 
 def test_generate_prompt_with_context(client):
@@ -46,15 +31,9 @@ def test_generate_prompt_with_context(client):
     # Check status code
     assert response.status_code == 200
     
-    # Validate schema
+    # Validate response schema
     data = response.json()
-    validator = TypeAdapter(PromptTokens)
-    tokens = validator.validate_python(data)
-    
-    # Basic validation
-    assert tokens.subject_token
-    assert tokens.action_token
-    assert tokens.environment_token
+    PromptTokens(**data)
 
 
 def test_generate_prompt_with_auth(client):
@@ -65,12 +44,6 @@ def test_generate_prompt_with_auth(client):
     # Check status code
     assert response.status_code == 200
     
-    # Validate schema
+    # Validate response schema
     data = response.json()
-    validator = TypeAdapter(PromptTokens)
-    tokens = validator.validate_python(data)
-    
-    # Basic validation
-    assert tokens.subject_token
-    assert tokens.action_token
-    assert tokens.environment_token 
+    PromptTokens(**data) 

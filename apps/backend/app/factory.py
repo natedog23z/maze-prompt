@@ -1,5 +1,6 @@
 from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
+
 from .deps import get_current_user
 
 def create_app() -> FastAPI:
