@@ -1,0 +1,99 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Core Colors */
+    --bg-primary-val: 10 10 10; /* #0a0a0a */
+    --bg-secondary-val: 20 20 20; /* #141414 */
+    --bg-tertiary-val: 26 26 26; /* #1a1a1a */
+    --text-primary-val: 255 255 255; /* #ffffff */
+    --text-secondary-val: 160 160 160; /* #a0a0a0 */
+    --border-color-val: 42 42 42; /* #2a2a2a */
+
+    /* Brand & Accent Colors */
+    --accent-primary-val: 124 58 237; /* #7c3aed */
+    --accent-hover-val: 139 92 246; /* #8b5cf6 */
+    --accent-gradient-end-val: 168 85 247; /* #a855f7 */
+
+    /* Semantic Colors */
+    --status-success-val: 16 185 129; /* #10b981 */
+    --status-warning-val: 245 158 11; /* #f59e0b */
+    --status-error-val: 239 68 68; /* #ef4444 */
+
+    /* Shadcn UI CSS Variables */
+    --background: var(--bg-primary-val); /* Primary Background */
+    --foreground: var(--text-primary-val); /* Primary Text */
+
+    --card: var(--bg-secondary-val); /* Secondary Background for Cards */
+    --card-foreground: var(--text-primary-val);
+
+    --popover: var(--bg-secondary-val); /* Secondary Background for Popovers */
+    --popover-foreground: var(--text-primary-val);
+
+    --primary: var(--accent-primary-val); /* Primary Accent */
+    --primary-foreground: var(--text-primary-val);
+
+    --secondary: var(--bg-tertiary-val); /* Tertiary Background for Secondary elements */
+    --secondary-foreground: var(--text-primary-val);
+
+    --muted: var(--bg-tertiary-val); /* Tertiary Background for Muted elements */
+    --muted-foreground: var(--text-secondary-val); /* Secondary Text for Muted Foreground */
+
+    --accent: var(--accent-primary-val); /* Can be primary accent or hover */
+    --accent-foreground: var(--text-primary-val);
+
+    --destructive: var(--status-error-val); /* Error Red */
+    --destructive-foreground: var(--text-primary-val);
+
+    --border: var(--border-color-val); /* Border Color */
+    --input: var(--border-color-val); /* Input border, background will be --muted */
+    --ring: var(--accent-primary-val); /* Focus Ring (Primary Accent) */
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    /* Ensure dark mode variables are the same if you're only using a dark theme */
+    --background: var(--bg-primary-val);
+    --foreground: var(--text-primary-val);
+
+    --card: var(--bg-secondary-val);
+    --card-foreground: var(--text-primary-val);
+
+    --popover: var(--bg-secondary-val);
+    --popover-foreground: var(--text-primary-val);
+
+    --primary: var(--accent-primary-val);
+    --primary-foreground: var(--text-primary-val);
+
+    --secondary: var(--bg-tertiary-val);
+    --secondary-foreground: var(--text-primary-val);
+
+    --muted: var(--bg-tertiary-val);
+    --muted-foreground: var(--text-secondary-val);
+
+    --accent: var(--accent-primary-val);
+    --accent-foreground: var(--text-primary-val);
+
+    --destructive: var(--status-error-val);
+    --destructive-foreground: var(--text-primary-val);
+
+    --border: var(--border-color-val);
+    --input: var(--border-color-val);
+    --ring: var(--accent-primary-val);
+  }
+
+  /* Remove the problematic universal border rule */
+  * {
+    border-color: rgb(var(--border-color-val));
+  }
+
+  body {
+    /* Force dark background */
+    background-color: rgb(10 10 10); /* #0a0a0a fallback */
+    color: rgb(255 255 255); /* #ffffff fallback */
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
