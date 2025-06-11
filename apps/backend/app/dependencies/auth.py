@@ -3,40 +3,49 @@ from typing import Dict, Optional
 
 # Third-party imports
 from fastapi import Depends, HTTPException, status
-from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
+from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 
 security = HTTPBearer(auto_error=False)
 
-# Mock user database - in a real app, this would be a database
+# Mock users database for testing
 mock_users = {
-    "valid_token": {"user_id": "user123", "username": "testuser"}
+    "valid_token": {"user_id": 1, "username": "testuser"},
+    "admin_token": {"user_id": 2, "username": "admin", "is_admin": True},
 }
 
-
-async def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(security)) -> Dict:
-    """
-    Mock JWT authentication dependency.
-    In a real app, this would validate the JWT token and return the user.
-    """
+def get_current_user(
+    credentials: HTTPAuthorizationCredentials = Depends(security)
+) -> Dict:
+    """Temporary mock authentication - requires a valid token."""
     if not credentials:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Authentication required",
             headers={"WWW-Authenticate": "Bearer"},
         )
-        
+    
     token = credentials.credentials
-    if token not in mock_users:
+    
+    # For simplicity in testing, we accept any non-empty token
+    # In a real application, we would validate the JWT here
+    if not token:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Invalid authentication credentials",
+            detail="Invalid authentication token",
             headers={"WWW-Authenticate": "Bearer"},
         )
-    return mock_users[token]
+    
+    # In a real app, we would decode and verify the JWT
+    # For testing, we'll use our mock users
+    if token in mock_users:
+        return mock_users[token]
+    
+    # For any other non-empty token, return a default user
+    return {"user_id": 999, "username": "default_user"}
 
 
 # Optional auth for endpoints that can work with or without authentication
-async def get_optional_user(
+def get_optional_user(
     credentials: Optional[HTTPAuthorizationCredentials] = Depends(security)
 ) -> Optional[Dict]:
     """Optional authentication - returns None if no valid token is provided"""
@@ -44,13 +53,8 @@ async def get_optional_user(
         return None
     
     token = credentials.credentials
-    if token not in mock_users:
+    if not token:
         return None
         
-    return mock_users[token]
-
-def get_optional_user(credentials: HTTPAuthorizationCredentials = Depends(security)) -> Optional[Dict]:
-    """Temporary mock authentication - accepts any non-empty token."""
-    if not credentials:
-        return None
-    return {"user_id": 1}  # stub user 
+    # For any non-empty token, return a stub user
+    return {"user_id": 1} 

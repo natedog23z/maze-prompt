@@ -1,8 +1,9 @@
-from fastapi import FastAPI, Depends
+from fastapi import Depends, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from .deps import get_current_user
-from .routers import prompts_router, health_router
+from .routers import health_router, prompts_router
+
 
 def create_app() -> FastAPI:
     """Create and configure the FastAPI application."""

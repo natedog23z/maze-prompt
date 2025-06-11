@@ -1,13 +1,10 @@
 # Standard library imports
-import pytest
 
 # Third-party imports
-from fastapi.testclient import TestClient
-from pydantic import TypeAdapter
-
 # Local imports
 from app.factory import create_app
 from app.models.prompts import PromptTokens
+from fastapi.testclient import TestClient
 
 client = TestClient(create_app())
 

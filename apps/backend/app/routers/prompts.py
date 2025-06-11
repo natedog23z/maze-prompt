@@ -4,9 +4,9 @@ from fastapi import APIRouter, Depends
 from pydantic import BaseModel
 
 from packages.agents.subject import SubjectAgent
-from ..models.prompts import PromptTokens
 
 from ..deps import get_current_user
+from ..models.prompts import PromptTokens
 
 router = APIRouter(prefix="/prompts", tags=["prompts"])
 
