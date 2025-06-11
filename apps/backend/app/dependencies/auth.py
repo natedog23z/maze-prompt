@@ -47,4 +47,10 @@ async def get_optional_user(
     if token not in mock_users:
         return None
         
-    return mock_users[token] 
+    return mock_users[token]
+
+def get_optional_user(credentials: HTTPAuthorizationCredentials = Depends(security)) -> Optional[Dict]:
+    """Temporary mock authentication - accepts any non-empty token."""
+    if not credentials:
+        return None
+    return {"user_id": 1}  # stub user 

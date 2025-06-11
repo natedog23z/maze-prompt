@@ -6,20 +6,20 @@ from fastapi.testclient import TestClient
 from pydantic import TypeAdapter
 
 # Local imports
-from app.main import create_app
-from packages.models import PromptTokens
+from app.factory import create_app
+from app.models.prompts import PromptTokens
 
 client = TestClient(create_app())
 
-def test_generate_prompt(client):
-    """Test that the generate endpoint returns a valid PromptTokens schema with 200 status code."""
-    response = client.post("/prompts/generate", json={})
-    
-    # Check status code
+def test_generate_prompt():
+    """Test the generate prompt endpoint."""
+    response = client.post(
+        "/api/v1/prompts/generate",
+        json={"prompt": "Test prompt"},
+    )
     assert response.status_code == 200
-    
-    # Validate response schema
     data = response.json()
+    # Validate response schema
     PromptTokens(**data)
 
 

@@ -2,12 +2,13 @@ from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
 
 from .deps import get_current_user
+from .routers import prompts_router, health_router
 
 def create_app() -> FastAPI:
     """Create and configure the FastAPI application."""
     app = FastAPI(
-        title="Maze API",
-        description="Backend API for the Maze application",
+        title="Maze Prompt API",
+        description="API for generating and managing prompts",
         version="0.1.0",
     )
 
@@ -21,13 +22,12 @@ def create_app() -> FastAPI:
     )
 
     # Import and include routers
-    from app.routers import health, prompts
-    app.include_router(health.router)
-    app.include_router(prompts.router)
+    app.include_router(health_router)
+    app.include_router(prompts_router, prefix="/api/v1")
 
     @app.get("/ping")
     def ping(user=Depends(get_current_user)):
-        """Ping endpoint that requires authentication."""
+        """Health check endpoint that requires authentication."""
         return {"ping": "pong", "user": user["user_id"]}
 
     return app 
